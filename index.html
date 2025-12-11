@@ -1,0 +1,2379 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UBT Reviews - نظام تقييم الدكاترة والمواد</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* جميع الأنماط تبقى كما هي */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo h1 {
+            font-size: 1.5rem;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+            color: #3498db;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 12px;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+
+        nav a:hover, nav a.active {
+            background: #3498db;
+            color: white;
+        }
+
+        .language-switcher {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: white;
+        }
+
+        .language-switcher select {
+            padding: 5px 10px;
+            border-radius: 4px;
+            border: none;
+            background: #34495e;
+            color: white;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .search-box {
+            max-width: 600px;
+            margin: 2rem auto 0;
+            display: flex;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .search-box button {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .search-box button:hover {
+            background: #c0392b;
+        }
+
+        /* Features */
+        .features {
+            padding: 3rem 0;
+            background-color: #ecf0f1;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+            font-size: 2rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #3498db;
+            margin-bottom: 1rem;
+        }
+
+        /* نظام تقييم الطلاب */
+        .student-reviews-section {
+            padding: 3rem 0;
+            background: white;
+        }
+
+        .review-form-container {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            border: 2px solid #e9ecef;
+        }
+
+        .review-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1.1rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .form-control {
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .rating-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .rating-category {
+            background: white;
+            padding: 1.2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e9ecef;
+        }
+
+        .rating-category h4 {
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+            font-size: 1rem;
+        }
+
+        .stars {
+            display: flex;
+            gap: 5px;
+            direction: ltr;
+            justify-content: center;
+        }
+
+        .star {
+            color: #ddd;
+            cursor: pointer;
+            font-size: 1.6rem;
+            transition: all 0.2s;
+        }
+
+        .star:hover {
+            transform: scale(1.2);
+        }
+
+        .star.active {
+            color: #f39c12;
+            text-shadow: 0 0 10px rgba(243, 156, 18, 0.5);
+        }
+
+        .comment-box {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            resize: vertical;
+            min-height: 120px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .comment-box:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .submit-btn {
+            background: #2ecc71;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: block;
+            margin: 1rem auto 0;
+        }
+
+        .submit-btn:hover {
+            background: #27ae60;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(39, 174, 96, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* عرض تقييمات الطلاب */
+        .reviews-display {
+            margin-top: 3rem;
+        }
+
+        .reviews-grid {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .review-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-left: 4px solid #3498db;
+            position: relative;
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .review-professor {
+            font-weight: 600;
+            color: #2c3e50;
+            font-size: 1.2rem;
+        }
+
+        .review-course {
+            color: #7f8c8d;
+            font-size: 1rem;
+        }
+
+        .review-date {
+            color: #95a5a6;
+            font-size: 0.9rem;
+        }
+
+        .review-ratings {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .rating-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .rating-label {
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .rating-stars {
+            color: #f39c12;
+            direction: ltr;
+        }
+
+        .review-comment {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #ecf0f1;
+            border-radius: 8px;
+            line-height: 1.6;
+        }
+
+        .anonymous-badge {
+            background: #95a5a6;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+        }
+
+        .no-reviews {
+            text-align: center;
+            padding: 3rem;
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+
+        .no-reviews i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #bdc3c7;
+        }
+
+        /* Browse Section */
+        .courses-professors {
+            padding: 3rem 0;
+            flex: 1;
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #ddd;
+            flex-wrap: wrap;
+        }
+
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab.active {
+            border-bottom: 3px solid #3498db;
+            color: #3498db;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .item-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .item-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .item-img {
+            height: 160px;
+            background: linear-gradient(45deg, #3498db, #9b59b6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+        }
+
+        .item-info {
+            padding: 1.2rem;
+        }
+
+        .item-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin: 8px 0;
+            color: #f39c12;
+        }
+
+        /* Admin Section */
+        .admin-section {
+            padding: 1.5rem;
+            background: #ecf0f1;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        .admin-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .admin-form input, .admin-form select, .admin-form textarea {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .admin-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 1rem;
+        }
+
+        .admin-btn:hover {
+            background: #2980b9;
+        }
+
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            padding: 2rem 0 1rem;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #3498db;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .anonymous-check {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin: 1rem 0;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #3498db;
+        }
+
+        .error {
+            text-align: center;
+            padding: 2rem;
+            color: #e74c3c;
+        }
+
+        /* أزرار الحذف والتعديل */
+        .item-actions {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            gap: 5px;
+        }
+
+        .edit-btn, .delete-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .edit-btn {
+            color: #3498db;
+        }
+
+        .edit-btn:hover {
+            background: #3498db;
+            color: white;
+        }
+
+        .delete-btn {
+            color: #e74c3c;
+        }
+
+        .delete-btn:hover {
+            background: #e74c3c;
+            color: white;
+        }
+
+        /* Modal للتعديل */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 1rem;
+            justify-content: flex-end;
+            flex-wrap: wrap;
+        }
+
+        .cancel-btn {
+            background: #95a5a6;
+            color: white;
+        }
+
+        .cancel-btn:hover {
+            background: #7f8c8d;
+        }
+
+        /* إشعارات */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            background: #2ecc71;
+            color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1001;
+            transform: translateX(150%);
+            transition: transform 0.3s ease-in-out;
+            max-width: 300px;
+            word-wrap: break-word;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification.error {
+            background: #e74c3c;
+        }
+
+        /* أزرار حذف التقييمات */
+        .review-actions {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            gap: 5px;
+        }
+
+        .review-delete-btn {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            color: #e74c3c;
+        }
+
+        .review-delete-btn:hover {
+            background: #e74c3c;
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                justify-content: center;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .rating-categories {
+                grid-template-columns: 1fr;
+            }
+            
+            .admin-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                margin: 1rem;
+            }
+
+            .notification {
+                right: 10px;
+                left: 10px;
+                max-width: calc(100% - 20px);
+                transform: translateY(-100px);
+            }
+            
+            .notification.show {
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                width: 95%;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .items-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                text-align: center;
+            }
+        }
+
+        /* Language-specific styles */
+        body[dir="rtl"] {
+            text-align: right;
+        }
+
+        body[dir="ltr"] {
+            text-align: left;
+        }
+
+        body[dir="ltr"] .review-header {
+            justify-content: space-between;
+        }
+
+        body[dir="ltr"] .anonymous-badge {
+            margin-right: 0;
+            margin-left: 0.5rem;
+        }
+
+        body[dir="ltr"] .item-actions {
+            top: 10px;
+            right: 10px;
+            left: auto;
+        }
+
+        body[dir="ltr"] .review-card {
+            border-left: none;
+            border-right: 4px solid #3498db;
+        }
+
+        body[dir="ltr"] .review-actions {
+            top: 10px;
+            right: 10px;
+            left: auto;
+        }
+    </style>
+</head>
+<body dir="rtl">
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h1>UBT Reviews</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#" onclick="showSection('home')" class="active">الرئيسية</a></li>
+                        <li><a href="#" onclick="showSection('browse')">الدكاترة والمواد</a></li>
+                        <li><a href="#" onclick="showSection('reviews')">تقييمات الطلاب</a></li>
+                        <li><a href="#" onclick="showSection('admin')">لوحة الإدارة</a></li>
+                    </ul>
+                </nav>
+                <div class="language-switcher">
+                    <span>اللغة:</span>
+                    <select id="language-select" onchange="changeLanguage(this.value)">
+                        <option value="ar">العربية</option>
+                        <option value="en">English</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <h2>شارك تجربتك الدراسية</h2>
+            <p>موقع UBT Reviews يساعد الطلاب والطالبات على مشاركة آرائهم وتقييماتهم للمقررات والدكاترة في جامعة UBT. ساعد زملاءك في اختيار المقررات المناسبة!</p>
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="ابحث عن مقرر، دكتور، أو كلية...">
+                <button onclick="performSearch()"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">مميزات الموقع</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>بحث متقدم</h3>
+                    <p>ابحث عن المقررات والدكاترة باستخدام نظام بحث وفائق متطورة</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-user-secret"></i>
+                    </div>
+                    <h3>تقييم مجهول</h3>
+                    <p>شارك رأيك بحرية مع خيار التقييم المجهول للحفاظ على خصوصيتك</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <h3>تقييم تفصيلي</h3>
+                    <p>نظام تقييم متكامل بفضل وضوح الشرح، أسلوب الدكتور، وسهولة المادة</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Student Reviews Section -->
+    <section id="reviews" class="student-reviews-section" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">تقييمات الطلاب</h2>
+            
+            <!-- نموذج إضافة التقييم -->
+            <div class="review-form-container">
+                <h3 style="margin-bottom: 1.5rem; color: #2c3e50;">أضف تقييمك</h3>
+                <form class="review-form" onsubmit="submitStudentReview(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="review-professor">اختر الدكتور:</label>
+                            <select id="review-professor" class="form-control" required>
+                                <option value="">-- اختر الدكتور --</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="review-course">اختر المادة:</label>
+                            <select id="review-course" class="form-control" required>
+                                <option value="">-- اختر المادة --</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- تقييم النجوم -->
+                    <div class="rating-categories">
+                        <div class="rating-category">
+                            <h4>وضوح الشرح</h4>
+                            <div class="stars">
+                                <span class="star" onclick="rateStudentCategory(this, 'clarity')">★</span>
+                                <span class="star" onclick="rateStudentCategory(this, 'clarity')">★</span>
+                                <span class="star" onclick="rateStudentCategory(this, 'clarity')">★</span>
+                                <span class="star" onclick="rateStudentCategory(this, 'clarity')">★</span>
+                                <span class="star" onclick="rateStudentCategory(this, 'clarity')">★</span>
+                            </div>
+                        </div>
+                        <div class="rating-category">
+                            <h4>أسلوب الدكتور</h4>
+                            <div class="stars">
+                                <span class="star" onclick="rateStudentCategory(this, 'teaching')">★</span>
+                                <span class="star" onclick="rateStudentCategory(this, 'teaching')">★</span>
+                                <span class="star" onclick="rateStudentCategory(this, 'teaching')">★</span>
+                                <span class="star" onclick="rateStudentCategory(this, 'teaching')">★</span>
+                                <span class="star" onclick="rateStudentCategory(this, 'teaching')">★</span>
+                            </div>
+                        </div>
+                        <div class="rating-category">
+                            <h4>سهولة المادة</h4>
+                            <div class="stars">
+                                <span class="star" onclick="rateStudentCategory(this, 'difficulty')">★</span>
+                                <span class="star" onclick="rateStudentCategory(this, 'difficulty')">★</span>
+                                <span class="star" onclick="rateStudentCategory(this, 'difficulty')">★</span>
+                                <span class="star" onclick="rateStudentCategory(this, 'difficulty')">★</span>
+                                <span class="star" onclick="rateStudentCategory(this, 'difficulty')">★</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- التعليق الإضافي -->
+                    <div class="form-group">
+                        <label for="review-comment">تعليقك الإضافي:</label>
+                        <textarea 
+                            id="review-comment" 
+                            class="comment-box" 
+                            placeholder="اكتب تعليقك الإضافي هنا... شارك تجربتك مع الدكتور والمادة..."
+                            required
+                        ></textarea>
+                    </div>
+
+                    <!-- التقييم المجهول -->
+                    <div class="anonymous-check">
+                        <input type="checkbox" id="review-anonymous">
+                        <label for="review-anonymous">إرسال التقييم بشكل مجهول</label>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> إرسال التقييم
+                    </button>
+                </form>
+            </div>
+
+            <!-- عرض التقييمات -->
+            <div class="reviews-display">
+                <h3 style="margin-bottom: 1.5rem; color: #2c3e50;">آراء الطلاب</h3>
+                <div class="reviews-grid" id="reviews-grid">
+                    <!-- التقييمات تظهر هنا -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Browse Section -->
+    <section id="browse" class="courses-professors" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">تصفح المقررات والدكاترة</h2>
+            
+            <div class="tabs">
+                <div class="tab active" onclick="showTab('professors')">الدكاترة</div>
+                <div class="tab" onclick="showTab('courses')">المواد الدراسية</div>
+            </div>
+            
+            <div class="tab-content active" id="professors-content">
+                <div class="items-grid" id="professors-grid">
+                    <div class="loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>جاري تحميل بيانات الدكاترة...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="courses-content">
+                <div class="items-grid" id="courses-grid">
+                    <div class="loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>جاري تحميل بيانات المواد...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Section -->
+    <section id="admin" class="courses-professors" style="display: none;">
+        <div class="container">
+            <h2 class="section-title">لوحة إدارة البيانات</h2>
+            
+            <div class="admin-section">
+                <h3>إضافة دكتور جديد</h3>
+                <form class="admin-form" onsubmit="addProfessor(event)">
+                    <input type="text" id="prof-name-ar" placeholder="اسم الدكتور بالعربي" required>
+                    <input type="text" id="prof-name-en" placeholder="اسم الدكتور بالإنجليزي" required>
+                    <input type="text" id="prof-specialty" placeholder="التخصص">
+                    <input type="number" id="prof-experience" placeholder="سنوات الخبرة">
+                    <input type="text" id="prof-education" placeholder="المؤهل العلمي">
+                    <select id="prof-college" required>
+                        <option value="">اختر الكلية</option>
+                        <option value="كلية القانون">كلية القانون</option>
+                        <option value="كلية إدارة الأعمال">كلية إدارة الأعمال</option>
+                        <option value="كلية الإعلان">كلية الإعلان</option>
+                        <option value="كلية الهندسة">كلية الهندسة</option>
+                    </select>
+                    <input type="email" id="prof-email" placeholder="البريد الإلكتروني">
+                    <button type="submit" class="admin-btn">إضافة دكتور</button>
+                </form>
+            </div>
+
+            <div class="admin-section">
+                <h3>إضافة مادة جديدة</h3>
+                <form class="admin-form" onsubmit="addCourse(event)">
+                    <input type="text" id="course-name-ar" placeholder="اسم المادة بالعربي" required>
+                    <input type="text" id="course-name-en" placeholder="اسم المادة بالإنجليزي" required>
+                    <input type="text" id="course-code" placeholder="كود المادة" required>
+                    <select id="course-college" required>
+                        <option value="">اختر الكلية</option>
+                        <option value="كلية القانون">كلية القانون</option>
+                        <option value="كلية إدارة الأعمال">كلية إدارة الأعمال</option>
+                        <option value="كلية الإعلان">كلية الإعلان</option>
+                        <option value="كلية الهندسة">كلية الهندسة</option>
+                    </select>
+                    <textarea id="course-description" placeholder="وصف المادة" required></textarea>
+                    <button type="submit" class="admin-btn">إضافة مادة</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>حولنا</h3>
+                    <p>UBT Reviews هو منصة طلابية تهدف إلى مساعدة طلاب وطالبات جامعة UBT في اختيار المقررات والدكاترة المناسبين من خلال تجارب وآراء الطلاب السابقين.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="#" onclick="showSection('home')">الرئيسية</a></li>
+                        <li><a href="#" onclick="showSection('browse')">الدكاترة والمواد</a></li>
+                        <li><a href="#" onclick="showSection('reviews')">تقييمات الطلاب</a></li>
+                        <li><a href="#" onclick="showSection('admin')">لوحة الإدارة</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>اتصل بنا</h3>
+                    <p>للاستفسارات أو المقترحات، يمكنك التواصل معنا عبر البريد الإلكتروني:</p>
+                    <p>info@ubtreviews.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2023 UBT Reviews. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal للتعديل -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <h3 id="modalTitle">تعديل البيانات</h3>
+            <form id="editForm">
+                <input type="hidden" id="edit-id">
+                <input type="hidden" id="edit-type">
+                <div class="admin-form">
+                    <input type="text" id="edit-name-ar" placeholder="الاسم بالعربي" required>
+                    <input type="text" id="edit-name-en" placeholder="الاسم بالإنجليزي" required>
+                    <input type="text" id="edit-specialty" placeholder="التخصص">
+                    <input type="number" id="edit-experience" placeholder="سنوات الخبرة">
+                    <input type="text" id="edit-education" placeholder="المؤهل العلمي">
+                    <select id="edit-college" required>
+                        <option value="">اختر الكلية</option>
+                        <option value="كلية القانون">كلية القانون</option>
+                        <option value="كلية إدارة الأعمال">كلية إدارة الأعمال</option>
+                        <option value="كلية الإعلان">كلية الإعلان</option>
+                        <option value="كلية الهندسة">كلية الهندسة</option>
+                    </select>
+                    <input type="email" id="edit-email" placeholder="البريد الإلكتروني">
+                    <input type="text" id="edit-code" placeholder="كود المادة" style="display: none;">
+                    <textarea id="edit-description" placeholder="وصف المادة" style="display: none;"></textarea>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="admin-btn cancel-btn" onclick="closeModal()">إلغاء</button>
+                    <button type="submit" class="admin-btn">حفظ التعديلات</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- إشعارات -->
+    <div id="notification" class="notification"></div>
+
+    <script>
+        // 🔥 نظام تقييم الطلاب الجديد - الإصدار المصحح
+        let studentRatings = {
+            clarity: 0,
+            teaching: 0,
+            difficulty: 0
+        };
+
+        // 🔑 إعدادات MockAPI المحدثة - باستخدام LocalStorage كبديل
+        const API_BASE = "https://691fb05631e684d7bfca6ee8.mockapi.io/";
+        
+        let cloudData = {
+            professors: [],
+            courses: [],
+            studentReviews: []
+        };
+
+        // دالة محسنة لتحميل البيانات مع LocalStorage كبديل
+        async function loadCloudData() {
+            try {
+                // محاولة تحميل البيانات من MockAPI أولاً
+                const [profsRes, coursesRes, reviewsRes] = await Promise.all([
+                    fetch(`${API_BASE}professors`).catch(() => ({ ok: false })),
+                    fetch(`${API_BASE}courses`).catch(() => ({ ok: false })),
+                    fetch(`${API_BASE}studentReviews`).catch(() => ({ ok: false }))
+                ]);
+
+                let professors = [];
+                let courses = [];
+                let studentReviews = [];
+
+                // إذا فشل الاتصال بـ MockAPI، استخدم LocalStorage
+                if (profsRes.ok) {
+                    professors = await profsRes.json();
+                    localStorage.setItem('professors', JSON.stringify(professors));
+                } else {
+                    const stored = localStorage.getItem('professors');
+                    professors = stored ? JSON.parse(stored) : [];
+                }
+
+                if (coursesRes.ok) {
+                    courses = await coursesRes.json();
+                    localStorage.setItem('courses', JSON.stringify(courses));
+                } else {
+                    const stored = localStorage.getItem('courses');
+                    courses = stored ? JSON.parse(stored) : [];
+                }
+
+                if (reviewsRes.ok) {
+                    studentReviews = await reviewsRes.json();
+                    localStorage.setItem('studentReviews', JSON.stringify(studentReviews));
+                } else {
+                    const stored = localStorage.getItem('studentReviews');
+                    studentReviews = stored ? JSON.parse(stored) : [];
+                }
+
+                cloudData = { professors, courses, studentReviews };
+                return cloudData;
+            } catch (err) {
+                console.error("Error loading data:", err);
+                // استخدام LocalStorage كبديل
+                const professors = JSON.parse(localStorage.getItem('professors') || '[]');
+                const courses = JSON.parse(localStorage.getItem('courses') || '[]');
+                const studentReviews = JSON.parse(localStorage.getItem('studentReviews') || '[]');
+                
+                cloudData = { professors, courses, studentReviews };
+                return cloudData;
+            }
+        }
+
+        // دالة محسنة لحفظ التقييم
+        async function saveReview(review) {
+            try {
+                console.log("جاري إرسال البيانات إلى MockAPI:", review);
+                
+                // إضافة ID فريد للتقييم
+                review.id = 'review_' + Date.now();
+                
+                const res = await fetch(`${API_BASE}studentReviews`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(review)
+                });
+                
+                if (res.ok) {
+                    const data = await res.json();
+                    console.log("تم استلام الرد من MockAPI:", data);
+                    
+                    // حفظ في LocalStorage أيضاً
+                    const storedReviews = JSON.parse(localStorage.getItem('studentReviews') || '[]');
+                    storedReviews.push(data);
+                    localStorage.setItem('studentReviews', JSON.stringify(storedReviews));
+                    
+                    return data;
+                } else {
+                    throw new Error(`خطأ في الاستجابة: ${res.status}`);
+                }
+                
+            } catch (error) {
+                console.error("Error in saveReview:", error);
+                console.log("جاري استخدام LocalStorage كبديل...");
+                
+                // استخدام LocalStorage كبديل
+                const storedReviews = JSON.parse(localStorage.getItem('studentReviews') || '[]');
+                review.id = 'review_' + Date.now();
+                storedReviews.push(review);
+                localStorage.setItem('studentReviews', JSON.stringify(storedReviews));
+                
+                return review;
+            }
+        }
+
+        // دوال أخرى للـ MockAPI
+        async function saveProfessor(professor) {
+            try {
+                professor.id = 'prof_' + Date.now();
+                const res = await fetch(`${API_BASE}professors`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(professor)
+                });
+                
+                if (res.ok) {
+                    const data = await res.json();
+                    const storedProfs = JSON.parse(localStorage.getItem('professors') || '[]');
+                    storedProfs.push(data);
+                    localStorage.setItem('professors', JSON.stringify(storedProfs));
+                    return data;
+                } else {
+                    throw new Error('فشل في الحفظ');
+                }
+            } catch (error) {
+                console.error("Error saving professor:", error);
+                const storedProfs = JSON.parse(localStorage.getItem('professors') || '[]');
+                professor.id = 'prof_' + Date.now();
+                storedProfs.push(professor);
+                localStorage.setItem('professors', JSON.stringify(storedProfs));
+                return professor;
+            }
+        }
+
+        async function saveCourse(course) {
+            try {
+                course.id = 'course_' + Date.now();
+                const res = await fetch(`${API_BASE}courses`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(course)
+                });
+                
+                if (res.ok) {
+                    const data = await res.json();
+                    const storedCourses = JSON.parse(localStorage.getItem('courses') || '[]');
+                    storedCourses.push(data);
+                    localStorage.setItem('courses', JSON.stringify(storedCourses));
+                    return data;
+                } else {
+                    throw new Error('فشل في الحفظ');
+                }
+            } catch (error) {
+                console.error("Error saving course:", error);
+                const storedCourses = JSON.parse(localStorage.getItem('courses') || '[]');
+                course.id = 'course_' + Date.now();
+                storedCourses.push(course);
+                localStorage.setItem('courses', JSON.stringify(storedCourses));
+                return course;
+            }
+        }
+
+        // 🌐 دوال MockAPI الجديدة
+
+        // تحميل القوائم المنسدلة للدكاترة والمواد
+        async function loadReviewDropdowns() {
+            try {
+                await loadCloudData();
+                const professorSelect = document.getElementById('review-professor');
+                const courseSelect = document.getElementById('review-course');
+                const t = translations[currentLanguage];
+                
+                professorSelect.innerHTML = `<option value="">-- ${t.selectProfessor} --</option>`;
+                courseSelect.innerHTML = `<option value="">-- ${t.selectCourse} --</option>`;
+                
+                cloudData.professors.forEach(professor => {
+                    const option = document.createElement('option');
+                    option.value = professor.id;
+                    option.textContent = currentLanguage === 'ar' ? professor.name_ar : professor.name_en;
+                    professorSelect.appendChild(option);
+                });
+                
+                cloudData.courses.forEach(course => {
+                    const option = document.createElement('option');
+                    option.value = course.id;
+                    option.textContent = currentLanguage === 'ar' ? 
+                        `${course.name_ar} (${course.code})` : 
+                        `${course.name_en} (${course.code})`;
+                    courseSelect.appendChild(option);
+                });
+            } catch (error) {
+                console.error("Error loading dropdowns:", error);
+                showNotification("حدث خطأ في تحميل البيانات", true);
+            }
+        }
+
+        // إرسال تقييم الطالب - الإصدار المصحح بالكامل
+        async function submitStudentReview(event) {
+            event.preventDefault();
+            const t = translations[currentLanguage];
+            
+            try {
+                const professorId = document.getElementById('review-professor').value;
+                const courseId = document.getElementById('review-course').value;
+                const comment = document.getElementById('review-comment').value.trim();
+                const isAnonymous = document.getElementById('review-anonymous').checked;
+                
+                // التحقق من البيانات الأساسية
+                if (!professorId || !courseId) {
+                    showNotification(t.selectBoth, true);
+                    return;
+                }
+                
+                // التحقق من التقييمات
+                if (studentRatings.clarity === 0 || studentRatings.teaching === 0 || studentRatings.difficulty === 0) {
+                    showNotification(t.rateAll, true);
+                    return;
+                }
+                
+                if (!comment) {
+                    showNotification(t.writeComment, true);
+                    return;
+                }
+                
+                // البحث عن الدكتور والمادة في البيانات المحلية
+                const professor = cloudData.professors.find(p => p.id === professorId);
+                const course = cloudData.courses.find(c => c.id === courseId);
+                
+                if (!professor || !course) {
+                    showNotification(t.dataError, true);
+                    return;
+                }
+                
+                // إنشاء كائن التقييم مع البيانات الصحيحة
+                const reviewData = {
+                    professorId: professorId,
+                    professorName: currentLanguage === 'ar' ? professor.name_ar : professor.name_en,
+                    courseId: courseId,
+                    courseName: currentLanguage === 'ar' ? course.name_ar : course.name_en,
+                    courseCode: course.code,
+                    clarity: studentRatings.clarity,
+                    teaching: studentRatings.teaching,
+                    difficulty: studentRatings.difficulty,
+                    comment: comment,
+                    anonymous: isAnonymous,
+                    date: new Date().toLocaleDateString(currentLanguage === 'ar' ? 'ar-SA' : 'en-US'),
+                    timestamp: new Date().toISOString()
+                };
+                
+                console.log("بيانات التقييم المرسلة:", reviewData);
+                
+                // حفظ التقييم
+                const savedReview = await saveReview(reviewData);
+                console.log("التقييم المحفوظ بنجاح:", savedReview);
+                
+                // تحديث البيانات المحلية
+                cloudData.studentReviews.push(savedReview);
+                
+                // إعادة تعيين النموذج
+                resetReviewForm();
+                
+                showNotification(t.reviewSubmitted);
+                displayStudentReviews();
+                
+            } catch (error) {
+                console.error('تفاصيل الخطأ الكاملة:', error);
+                showNotification(`فشل في إرسال التقييم: ${error.message}`, true);
+            }
+        }
+
+        // دالة مساعدة لإعادة تعيين النموذج
+        function resetReviewForm() {
+            document.getElementById('review-comment').value = '';
+            document.getElementById('review-anonymous').checked = false;
+            document.querySelectorAll('.stars .star').forEach(star => {
+                star.classList.remove('active');
+            });
+            studentRatings = { clarity: 0, teaching: 0, difficulty: 0 };
+        }
+
+        // نظام النجوم لتقييم الطلاب
+        function rateStudentCategory(star, category) {
+            const stars = star.parentElement.querySelectorAll('.star');
+            const rating = Array.from(stars).indexOf(star) + 1;
+            
+            stars.forEach((s, index) => {
+                if (index < rating) {
+                    s.classList.add('active');
+                } else {
+                    s.classList.remove('active');
+                }
+            });
+            
+            studentRatings[category] = rating;
+            console.log(`تم تقييم ${category}: ${rating} نجوم`);
+        }
+
+        // 🔧 تصحيح دوال الحذف
+        async function deleteStudentReview(reviewId) {
+            const t = translations[currentLanguage];
+            if (!confirm(t.deleteConfirm)) return;
+            
+            try {
+                // حذف من LocalStorage
+                const storedReviews = JSON.parse(localStorage.getItem('studentReviews') || '[]');
+                const updatedReviews = storedReviews.filter(review => review.id !== reviewId);
+                localStorage.setItem('studentReviews', JSON.stringify(updatedReviews));
+                
+                // تحديث البيانات المحلية
+                cloudData.studentReviews = cloudData.studentReviews.filter(review => review.id !== reviewId);
+                
+                showNotification(t.reviewDeleted);
+                displayStudentReviews();
+            } catch (error) {
+                console.error("Error deleting review:", error);
+                showNotification("حدث خطأ في حذف التقييم", true);
+            }
+        }
+
+        // 🔧 تصحيح دالة حذف العناصر
+        async function deleteItem(type, id) {
+            const t = translations[currentLanguage];
+            if (!confirm(t.deleteConfirm)) return;
+            
+            try {
+                if (type === 'professor') {
+                    // حذف الدكتور من LocalStorage
+                    const storedProfs = JSON.parse(localStorage.getItem('professors') || '[]');
+                    const updatedProfs = storedProfs.filter(prof => prof.id !== id);
+                    localStorage.setItem('professors', JSON.stringify(updatedProfs));
+                    
+                    // تحديث البيانات المحلية
+                    cloudData.professors = cloudData.professors.filter(prof => prof.id !== id);
+                    
+                    showNotification(t.professorDeleted);
+                    refreshProfessorsList();
+                } else if (type === 'course') {
+                    // حذف المادة من LocalStorage
+                    const storedCourses = JSON.parse(localStorage.getItem('courses') || '[]');
+                    const updatedCourses = storedCourses.filter(course => course.id !== id);
+                    localStorage.setItem('courses', JSON.stringify(updatedCourses));
+                    
+                    // تحديث البيانات المحلية
+                    cloudData.courses = cloudData.courses.filter(course => course.id !== id);
+                    
+                    showNotification(t.courseDeleted);
+                    refreshCoursesList();
+                }
+            } catch (error) {
+                console.error(`Error deleting ${type}:`, error);
+                showNotification(`حدث خطأ في حذف ${type === 'professor' ? 'الدكتور' : 'المادة'}`, true);
+            }
+        }
+
+        // 🔧 تصحيح دالة التعديل
+        function editItem(type, id) {
+            const items = type === 'professor' ? cloudData.professors : cloudData.courses;
+            const item = items.find(item => item.id === id);
+            const t = translations[currentLanguage];
+            
+            if (!item) {
+                showNotification("العنصر غير موجود", true);
+                return;
+            }
+            
+            document.getElementById('edit-id').value = item.id;
+            document.getElementById('edit-type').value = type;
+            document.getElementById('edit-name-ar').value = item.name_ar || '';
+            document.getElementById('edit-name-en').value = item.name_en || '';
+            document.getElementById('edit-specialty').value = item.specialty || '';
+            document.getElementById('edit-experience').value = item.experience || '';
+            document.getElementById('edit-education').value = item.education || '';
+            document.getElementById('edit-college').value = item.college || '';
+            document.getElementById('edit-email').value = item.email || '';
+            
+            if (type === 'course') {
+                document.getElementById('edit-code').value = item.code || '';
+                document.getElementById('edit-description').value = item.description || '';
+                document.getElementById('edit-code').style.display = 'block';
+                document.getElementById('edit-description').style.display = 'block';
+            } else {
+                document.getElementById('edit-code').style.display = 'none';
+                document.getElementById('edit-description').style.display = 'none';
+            }
+            
+            document.getElementById('modalTitle').textContent = t.editData;
+            document.getElementById('editModal').style.display = 'flex';
+        }
+
+        // 🔧 تصحيح دالة حفظ التعديلات
+        document.getElementById('editForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const t = translations[currentLanguage];
+            
+            const id = document.getElementById('edit-id').value;
+            const type = document.getElementById('edit-type').value;
+            
+            const updatedItem = {
+                name_ar: document.getElementById('edit-name-ar').value,
+                name_en: document.getElementById('edit-name-en').value,
+                specialty: document.getElementById('edit-specialty').value,
+                experience: document.getElementById('edit-experience').value,
+                education: document.getElementById('edit-education').value,
+                college: document.getElementById('edit-college').value,
+                email: document.getElementById('edit-email').value
+            };
+            
+            if (type === 'course') {
+                updatedItem.code = document.getElementById('edit-code').value;
+                updatedItem.description = document.getElementById('edit-description').value;
+            }
+            
+            try {
+                if (type === 'professor') {
+                    // تحديث في LocalStorage
+                    const storedProfs = JSON.parse(localStorage.getItem('professors') || '[]');
+                    const index = storedProfs.findIndex(prof => prof.id === id);
+                    if (index !== -1) {
+                        storedProfs[index] = { ...storedProfs[index], ...updatedItem };
+                        localStorage.setItem('professors', JSON.stringify(storedProfs));
+                    }
+                    
+                    // تحديث البيانات المحلية
+                    const localIndex = cloudData.professors.findIndex(prof => prof.id === id);
+                    if (localIndex !== -1) {
+                        cloudData.professors[localIndex] = { ...cloudData.professors[localIndex], ...updatedItem };
+                    }
+                    
+                    showNotification(t.professorUpdated);
+                    refreshProfessorsList();
+                } else if (type === 'course') {
+                    // تحديث في LocalStorage
+                    const storedCourses = JSON.parse(localStorage.getItem('courses') || '[]');
+                    const index = storedCourses.findIndex(course => course.id === id);
+                    if (index !== -1) {
+                        storedCourses[index] = { ...storedCourses[index], ...updatedItem };
+                        localStorage.setItem('courses', JSON.stringify(storedCourses));
+                    }
+                    
+                    // تحديث البيانات المحلية
+                    const localIndex = cloudData.courses.findIndex(course => course.id === id);
+                    if (localIndex !== -1) {
+                        cloudData.courses[localIndex] = { ...cloudData.courses[localIndex], ...updatedItem };
+                    }
+                    
+                    showNotification(t.courseUpdated);
+                    refreshCoursesList();
+                }
+                
+                closeModal();
+            } catch (error) {
+                console.error("Error updating item:", error);
+                showNotification("حدث خطأ في التحديث", true);
+            }
+        });
+
+        // عرض تقييمات الطلاب
+        async function displayStudentReviews() {
+            try {
+                await loadCloudData();
+                const reviewsGrid = document.getElementById('reviews-grid');
+                const t = translations[currentLanguage];
+                
+                if (cloudData.studentReviews.length === 0) {
+                    reviewsGrid.innerHTML = `
+                        <div class="no-reviews">
+                            <i class="fas fa-comments"></i>
+                            <p>${t.noReviews}</p>
+                            <p>${t.beFirst}</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                cloudData.studentReviews.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                
+                reviewsGrid.innerHTML = cloudData.studentReviews.map(review => `
+                    <div class="review-card">
+                        <div class="review-actions">
+                            <button class="review-delete-btn" onclick="deleteStudentReview('${review.id}')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                        <div class="review-header">
+                            <div>
+                                <span class="review-professor">${review.professorName}</span>
+                                <span class="review-course">- ${review.courseName} (${review.courseCode})</span>
+                                ${review.anonymous ? `<span class="anonymous-badge">${currentLanguage === 'ar' ? 'مجهول' : 'Anonymous'}</span>` : ''}
+                            </div>
+                            <span class="review-date">${review.date}</span>
+                        </div>
+                        
+                        <div class="review-ratings">
+                            <div class="rating-item">
+                                <span class="rating-label">${t.clarity}:</span>
+                                <span class="rating-stars">${'★'.repeat(review.clarity)}${'☆'.repeat(5 - review.clarity)}</span>
+                            </div>
+                            <div class="rating-item">
+                                <span class="rating-label">${t.teachingStyle}:</span>
+                                <span class="rating-stars">${'★'.repeat(review.teaching)}${'☆'.repeat(5 - review.teaching)}</span>
+                            </div>
+                            <div class="rating-item">
+                                <span class="rating-label">${t.courseDifficulty}:</span>
+                                <span class="rating-stars">${'★'.repeat(review.difficulty)}${'☆'.repeat(5 - review.difficulty)}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="review-comment">
+                            <strong>${t.comment}:</strong><br>
+                            ${review.comment}
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error("Error displaying reviews:", error);
+                const reviewsGrid = document.getElementById('reviews-grid');
+                reviewsGrid.innerHTML = `
+                    <div class="error">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>حدث خطأ في تحميل التقييمات</p>
+                    </div>
+                `;
+            }
+        }
+
+        // تحديث قائمة الدكاترة
+        async function refreshProfessorsList() {
+            try {
+                await loadCloudData();
+                const professorsGrid = document.getElementById('professors-grid');
+                const t = translations[currentLanguage];
+                
+                if (cloudData.professors.length === 0) {
+                    professorsGrid.innerHTML = `
+                        <div class="no-reviews">
+                            <i class="fas fa-user-graduate"></i>
+                            <p>${t.noProfessors}</p>
+                            <p>${t.addUsingAdmin}</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                professorsGrid.innerHTML = cloudData.professors.map(professor => `
+                    <div class="item-card">
+                        <div class="item-actions">
+                            <button class="edit-btn" onclick="editItem('professor', '${professor.id}')">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="delete-btn" onclick="deleteItem('professor', '${professor.id}')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                        <div class="item-img">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="item-info">
+                            <h3>${currentLanguage === 'ar' ? professor.name_ar : professor.name_en}</h3>
+                            <p>${professor.specialty || t.noSpecialty}</p>
+                            <div class="item-rating">
+                                <span>${calculateProfessorRating(professor.id)}</span>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p><strong>${t.college}:</strong> ${professor.college}</p>
+                            <p><strong>${t.experience}:</strong> ${professor.experience || 'N/A'} ${t.years}</p>
+                            <p><strong>${t.education}:</strong> ${professor.education || 'N/A'}</p>
+                            <p><strong>${t.email}:</strong> ${professor.email || 'N/A'}</p>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error("Error refreshing professors list:", error);
+                const professorsGrid = document.getElementById('professors-grid');
+                professorsGrid.innerHTML = `
+                    <div class="error">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>حدث خطأ في تحميل بيانات الدكاترة</p>
+                    </div>
+                `;
+            }
+        }
+
+        // تحديث قائمة المواد
+        async function refreshCoursesList() {
+            try {
+                await loadCloudData();
+                const coursesGrid = document.getElementById('courses-grid');
+                const t = translations[currentLanguage];
+                
+                if (cloudData.courses.length === 0) {
+                    coursesGrid.innerHTML = `
+                        <div class="no-reviews">
+                            <i class="fas fa-book"></i>
+                            <p>${t.noCourses}</p>
+                            <p>${t.addUsingAdmin}</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                coursesGrid.innerHTML = cloudData.courses.map(course => `
+                    <div class="item-card">
+                        <div class="item-actions">
+                            <button class="edit-btn" onclick="editItem('course', '${course.id}')">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="delete-btn" onclick="deleteItem('course', '${course.id}')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                        <div class="item-img">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div class="item-info">
+                            <h3>${currentLanguage === 'ar' ? course.name_ar : course.name_en}</h3>
+                            <p>${course.code}</p>
+                            <div class="item-rating">
+                                <span>${calculateCourseRating(course.id)}</span>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p><strong>${t.college}:</strong> ${course.college}</p>
+                            <p>${course.description || t.noDescription}</p>
+                        </div>
+                    </div>
+                `).join('');
+            } catch (error) {
+                console.error("Error refreshing courses list:", error);
+                const coursesGrid = document.getElementById('courses-grid');
+                coursesGrid.innerHTML = `
+                    <div class="error">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p>حدث خطأ في تحميل بيانات المواد</p>
+                    </div>
+                `;
+            }
+        }
+
+        // إضافة دكتور
+        async function addProfessor(event) {
+            event.preventDefault();
+            const t = translations[currentLanguage];
+            
+            const professor = {
+                name_ar: document.getElementById('prof-name-ar').value,
+                name_en: document.getElementById('prof-name-en').value,
+                specialty: document.getElementById('prof-specialty').value,
+                experience: document.getElementById('prof-experience').value,
+                education: document.getElementById('prof-education').value,
+                college: document.getElementById('prof-college').value,
+                email: document.getElementById('prof-email').value
+            };
+            
+            try {
+                const savedProfessor = await saveProfessor(professor);
+                
+                // تحديث البيانات المحلية
+                cloudData.professors.push(savedProfessor);
+                
+                showNotification(t.professorAdded);
+                
+                // تفريغ الحقول
+                document.getElementById('prof-name-ar').value = '';
+                document.getElementById('prof-name-en').value = '';
+                document.getElementById('prof-specialty').value = '';
+                document.getElementById('prof-experience').value = '';
+                document.getElementById('prof-education').value = '';
+                document.getElementById('prof-email').value = '';
+                
+                // تحديث القائمة مباشرة
+                refreshProfessorsList();
+            } catch (error) {
+                console.error("Error adding professor:", error);
+                showNotification("حدث خطأ في إضافة الدكتور", true);
+            }
+        }
+
+        // إضافة مادة
+        async function addCourse(event) {
+            event.preventDefault();
+            const t = translations[currentLanguage];
+            
+            const course = {
+                name_ar: document.getElementById('course-name-ar').value,
+                name_en: document.getElementById('course-name-en').value,
+                code: document.getElementById('course-code').value,
+                college: document.getElementById('course-college').value,
+                description: document.getElementById('course-description').value
+            };
+            
+            try {
+                const savedCourse = await saveCourse(course);
+                
+                // تحديث البيانات المحلية
+                cloudData.courses.push(savedCourse);
+                
+                showNotification(t.courseAdded);
+                
+                // تفريغ الحقول
+                document.getElementById('course-name-ar').value = '';
+                document.getElementById('course-name-en').value = '';
+                document.getElementById('course-code').value = '';
+                document.getElementById('course-description').value = '';
+                
+                // تحديث القائمة مباشرة
+                refreshCoursesList();
+            } catch (error) {
+                console.error("Error adding course:", error);
+                showNotification("حدث خطأ في إضافة المادة", true);
+            }
+        }
+
+        // دوال الحذف الأخرى
+        async function deleteProfessor(id) {
+            const storedProfs = JSON.parse(localStorage.getItem('professors') || '[]');
+            const updatedProfs = storedProfs.filter(prof => prof.id !== id);
+            localStorage.setItem('professors', JSON.stringify(updatedProfs));
+            return true;
+        }
+
+        async function deleteCourse(id) {
+            const storedCourses = JSON.parse(localStorage.getItem('courses') || '[]');
+            const updatedCourses = storedCourses.filter(course => course.id !== id);
+            localStorage.setItem('courses', JSON.stringify(updatedCourses));
+            return true;
+        }
+
+        async function deleteReview(id) {
+            const storedReviews = JSON.parse(localStorage.getItem('studentReviews') || '[]');
+            const updatedReviews = storedReviews.filter(review => review.id !== id);
+            localStorage.setItem('studentReviews', JSON.stringify(updatedReviews));
+            return true;
+        }
+
+        // اللغة الحالية
+        let currentLanguage = 'ar';
+
+        // نصوص الترجمة
+        const translations = {
+            ar: {
+                // التنقل
+                home: "الرئيسية",
+                browse: "الدكاترة والمواد",
+                reviews: "تقييمات الطلاب",
+                admin: "لوحة الإدارة",
+                
+                // الصفحة الرئيسية
+                heroTitle: "شارك تجربتك الدراسية",
+                heroDescription: "موقع UBT Reviews يساعد الطلاب والطالبات على مشاركة آرائهم وتقييماتهم للمقررات والدكاترة في جامعة UBT. ساعد زملاءك في اختيار المقررات المناسبة!",
+                searchPlaceholder: "ابحث عن مقرر، دكتور، أو كلية...",
+                
+                // المميزات
+                featuresTitle: "مميزات الموقع",
+                advancedSearch: "بحث متقدم",
+                advancedSearchDesc: "ابحث عن المقررات والدكاترة باستخدام نظام بحث وفائق متطورة",
+                anonymousRating: "تقييم مجهول",
+                anonymousRatingDesc: "شارك رأيك بحرية مع خيار التقييم المجهول للحفاظ على خصوصيتك",
+                detailedEvaluation: "تقييم تفصيلي",
+                detailedEvaluationDesc: "نظام تقييم متكامل بفضل وضوح الشرح، أسلوب الدكتور، وسهولة المادة",
+                
+                // تقييمات الطلاب
+                studentReviews: "تقييمات الطلاب",
+                addReview: "أضف تقييمك",
+                selectProfessor: "اختر الدكتور:",
+                selectCourse: "اختر المادة:",
+                clarity: "وضوح الشرح",
+                teachingStyle: "أسلوب الدكتور",
+                courseDifficulty: "سهولة المادة",
+                additionalComment: "تعليقك الإضافي:",
+                commentPlaceholder: "اكتب تعليقك الإضافي هنا... شارك تجربتك مع الدكتور والمادة...",
+                anonymousReview: "إرسال التقييم بشكل مجهول",
+                submitReview: "إرسال التقييم",
+                studentOpinions: "آراء الطلاب",
+                noReviews: "لا توجد تقييمات حتى الآن",
+                beFirst: "كن أول من يشارك تجربته!",
+                professor: "الدكتور",
+                course: "المادة",
+                date: "التاريخ",
+                comment: "التعليق",
+                
+                // تصفح
+                browseTitle: "تصفح المقررات والدكاترة",
+                professors: "الدكاترة",
+                courses: "المواد الدراسية",
+                loadingProfessors: "جاري تحميل بيانات الدكاترة...",
+                loadingCourses: "جاري تحميل بيانات المواد...",
+                noProfessors: "لا توجد دكاترة مضافة بعد",
+                noCourses: "لا توجد مواد مضافة بعد",
+                addUsingAdmin: "أضف باستخدام لوحة الإدارة",
+                specialty: "التخصص",
+                college: "الكليّة",
+                experience: "الخبرة",
+                years: "سنوات",
+                code: "الكود",
+                description: "الوصف",
+                noDescription: "لا يوجد وصف متاح",
+                noSpecialty: "لا يوجد تخصص محدد",
+                
+                // لوحة الإدارة
+                adminTitle: "لوحة إدارة البيانات",
+                addNewProfessor: "إضافة دكتور جديد",
+                professorNameAr: "اسم الدكتور بالعربي",
+                professorNameEn: "اسم الدكتور بالإنجليزي",
+                specialtyPlaceholder: "التخصص",
+                experiencePlaceholder: "سنوات الخبرة",
+                education: "المؤهل العلمي",
+                selectCollege: "اختر الكلية",
+                email: "البريد الإلكتروني",
+                addProfessor: "إضافة دكتور",
+                addNewCourse: "إضافة مادة جديدة",
+                courseNameAr: "اسم المادة بالعربي",
+                courseNameEn: "اسم المادة بالإنجليزي",
+                courseCode: "كود المادة",
+                courseDescription: "وصف المادة",
+                addCourse: "إضافة مادة",
+                
+                // التذييل
+                aboutUs: "حولنا",
+                aboutText: "UBT Reviews هو منصة طلابية تهدف إلى مساعدة طلاب وطالبات جامعة UBT في اختيار المقررات والدكاترة المناسبين من خلال تجارب وآراء الطلاب السابقين.",
+                quickLinks: "روابط سريعة",
+                contactUs: "اتصل بنا",
+                contactText: "للاستفسارات أو المقترحات، يمكنك التواصل معنا عبر البريد الإلكتروني:",
+                rights: "جميع الحقوق محفوظة.",
+                
+                // أخرى
+                language: "اللغة",
+                edit: "تعديل",
+                delete: "حذف",
+                save: "حفظ",
+                cancel: "إلغاء",
+                editData: "تعديل البيانات",
+                nameAr: "الاسم بالعربي",
+                nameEn: "الاسم بالإنجليزي",
+                search: "بحث",
+                noResults: "لم يتم العثور على نتائج لبحثك",
+                resultsFound: "تم العثور على نتيجة لبحثك",
+                professorAdded: "تم إضافة الدكتور بنجاح!",
+                courseAdded: "تم إضافة المادة بنجاح!",
+                reviewSubmitted: "تم إرسال تقييمك بنجاح! شكراً لمشاركتك",
+                selectBoth: "يرجى اختيار الدكتور والمادة",
+                rateAll: "يرجى تقييم جميع الفئات",
+                writeComment: "يرجى كتابة تعليق",
+                dataError: "خطأ في البيانات المحددة",
+                deleteConfirm: "هل أنت متأكد أنك تريد حذف هذا العنصر؟",
+                professorDeleted: "تم حذف الدكتور بنجاح!",
+                courseDeleted: "تم حذف المادة بنجاح!",
+                professorUpdated: "تم تحديث الدكتور بنجاح!",
+                courseUpdated: "تم تحديث المادة بنجاح!",
+                noRatings: "لا توجد تقييمات",
+                reviewDeleted: "تم حذف التقييم بنجاح!"
+            },
+            en: {
+                // Navigation
+                home: "Home",
+                browse: "Professors & Courses",
+                reviews: "Student Reviews",
+                admin: "Admin Panel",
+                
+                // Home page
+                heroTitle: "Share Your Academic Experience",
+                heroDescription: "UBT Reviews helps students share their opinions and ratings for courses and professors at UBT University. Help your peers choose the right courses!",
+                searchPlaceholder: "Search for a course, professor, or college...",
+                
+                // Features
+                featuresTitle: "Website Features",
+                advancedSearch: "Advanced Search",
+                advancedSearchDesc: "Search for courses and professors using an advanced hyper-search system",
+                anonymousRating: "Anonymous Rating",
+                anonymousRatingDesc: "Share your opinion freely with the option of anonymous evaluation to maintain your privacy",
+                detailedEvaluation: "Detailed Evaluation",
+                detailedEvaluationDesc: "A comprehensive evaluation system thanks to clear explanation, professor's style, and ease of material",
+                
+                // Student Reviews
+                studentReviews: "Student Reviews",
+                addReview: "Add Your Review",
+                selectProfessor: "Select Professor:",
+                selectCourse: "Select Course:",
+                clarity: "Clarity of Explanation",
+                teachingStyle: "Professor's Style",
+                courseDifficulty: "Course Difficulty",
+                additionalComment: "Your Additional Comment:",
+                commentPlaceholder: "Write your additional comment here... Share your experience with the professor and course...",
+                anonymousReview: "Submit review anonymously",
+                submitReview: "Submit Review",
+                studentOpinions: "Student Opinions",
+                noReviews: "No reviews yet",
+                beFirst: "Be the first to share your experience!",
+                professor: "Professor",
+                course: "Course",
+                date: "Date",
+                comment: "Comment",
+                
+                // Browse
+                browseTitle: "Browse Courses and Professors",
+                professors: "Professors",
+                courses: "Courses",
+                loadingProfessors: "Loading professor data...",
+                loadingCourses: "Loading course data...",
+                noProfessors: "No professors added yet",
+                noCourses: "No courses added yet",
+                addUsingAdmin: "Add using admin panel",
+                specialty: "Specialty",
+                college: "College",
+                experience: "Experience",
+                years: "years",
+                code: "Code",
+                description: "Description",
+                noDescription: "No description available",
+                noSpecialty: "No specialty specified",
+                
+                // Admin Panel
+                adminTitle: "Data Management Panel",
+                addNewProfessor: "Add New Professor",
+                professorNameAr: "Professor Name in Arabic",
+                professorNameEn: "Professor Name in English",
+                specialtyPlaceholder: "Specialty",
+                experiencePlaceholder: "Years of Experience",
+                education: "Educational Qualification",
+                selectCollege: "Select College",
+                email: "Email",
+                addProfessor: "Add Professor",
+                addNewCourse: "Add New Course",
+                courseNameAr: "Course Name in Arabic",
+                courseNameEn: "Course Name in English",
+                courseCode: "Course Code",
+                courseDescription: "Course Description",
+                addCourse: "Add Course",
+                
+                // Footer
+                aboutUs: "About Us",
+                aboutText: "UBT Reviews is a student platform that aims to help UBT University students choose appropriate courses and professors through the experiences and opinions of previous students.",
+                quickLinks: "Quick Links",
+                contactUs: "Contact Us",
+                contactText: "For inquiries or suggestions, you can contact us via email:",
+                rights: "All rights reserved.",
+                
+                // Others
+                language: "Language",
+                edit: "Edit",
+                delete: "Delete",
+                save: "Save",
+                cancel: "Cancel",
+                editData: "Edit Data",
+                nameAr: "Name in Arabic",
+                nameEn: "Name in English",
+                search: "Search",
+                noResults: "No results found for your search",
+                resultsFound: "Found result(s) for your search",
+                professorAdded: "Professor added successfully!",
+                courseAdded: "Course added successfully!",
+                reviewSubmitted: "Your review has been submitted successfully! Thank you for sharing",
+                selectBoth: "Please select both professor and course",
+                rateAll: "Please rate all categories",
+                writeComment: "Please write a comment",
+                dataError: "Error in selected data",
+                deleteConfirm: "Are you sure you want to delete this item?",
+                professorDeleted: "Professor deleted successfully!",
+                courseDeleted: "Course deleted successfully!",
+                professorUpdated: "Professor updated successfully!",
+                courseUpdated: "Course updated successfully!",
+                noRatings: "No ratings",
+                reviewDeleted: "Review deleted successfully!"
+            }
+        };
+
+        // 🔔 عرض الإشعارات
+        function showNotification(message, isError = false) {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = `notification ${isError ? 'error' : ''} show`;
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // دوال التحكم في الواجهة
+        function showSection(sectionId) {
+            document.querySelectorAll('section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById(sectionId).style.display = 'block';
+            updateActiveNav(sectionId);
+            
+            if (sectionId === 'browse') {
+                refreshProfessorsList();
+                showTab('professors');
+            } else if (sectionId === 'reviews') {
+                loadReviewDropdowns();
+                displayStudentReviews();
+            } else if (sectionId === 'admin') {
+                updateTexts();
+            }
+        }
+
+        // التبديل بين التبويبات
+        function showTab(tabName) {
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            document.querySelector(`.tab[onclick="showTab('${tabName}')"]`).classList.add('active');
+            document.getElementById(`${tabName}-content`).classList.add('active');
+            
+            if (tabName === 'professors') {
+                refreshProfessorsList();
+            } else if (tabName === 'courses') {
+                refreshCoursesList();
+            }
+        }
+
+        // حساب تقييم الدكتور
+        function calculateProfessorRating(professorId) {
+            const reviews = cloudData.studentReviews || [];
+            const professorReviews = reviews.filter(review => review.professorId == professorId);
+            const t = translations[currentLanguage];
+            
+            if (professorReviews.length === 0) return t.noRatings;
+            
+            const totalClarity = professorReviews.reduce((sum, review) => sum + review.clarity, 0);
+            const totalTeaching = professorReviews.reduce((sum, review) => sum + review.teaching, 0);
+            
+            const avgRating = (totalClarity + totalTeaching) / (professorReviews.length * 2);
+            return avgRating.toFixed(1);
+        }
+
+        // حساب تقييم المادة
+        function calculateCourseRating(courseId) {
+            const reviews = cloudData.studentReviews || [];
+            const courseReviews = reviews.filter(review => review.courseId == courseId);
+            const t = translations[currentLanguage];
+            
+            if (courseReviews.length === 0) return t.noRatings;
+            
+            const totalDifficulty = courseReviews.reduce((sum, review) => sum + review.difficulty, 0);
+            const avgRating = totalDifficulty / courseReviews.length;
+            return avgRating.toFixed(1);
+        }
+
+        // إغلاق النافذة المنبثقة
+        function closeModal() {
+            document.getElementById('editModal').style.display = 'none';
+        }
+
+        // البحث
+        function performSearch() {
+            const searchTerm = document.getElementById('search-input').value.toLowerCase().trim();
+            const t = translations[currentLanguage];
+            
+            if (!searchTerm) {
+                showNotification(t.search, true);
+                return;
+            }
+            
+            // البحث في الدكاترة
+            const matchingProfessors = cloudData.professors.filter(professor => 
+                professor.name_ar?.toLowerCase().includes(searchTerm) ||
+                professor.name_en?.toLowerCase().includes(searchTerm) ||
+                professor.specialty?.toLowerCase().includes(searchTerm) ||
+                professor.college?.toLowerCase().includes(searchTerm)
+            );
+            
+            // البحث في المواد
+            const matchingCourses = cloudData.courses.filter(course => 
+                course.name_ar?.toLowerCase().includes(searchTerm) ||
+                course.name_en?.toLowerCase().includes(searchTerm) ||
+                course.code?.toLowerCase().includes(searchTerm) ||
+                course.college?.toLowerCase().includes(searchTerm)
+            );
+            
+            // عرض النتائج
+            if (matchingProfessors.length === 0 && matchingCourses.length === 0) {
+                showNotification(t.noResults, true);
+                return;
+            }
+            
+            // عرض قسم التصفح مع النتائج
+            showSection('browse');
+            
+            // عرض النتائج
+            if (matchingProfessors.length > 0) {
+                showTab('professors');
+                const professorsGrid = document.getElementById('professors-grid');
+                professorsGrid.innerHTML = matchingProfessors.map(professor => `
+                    <div class="item-card">
+                        <div class="item-img">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="item-info">
+                            <h3>${currentLanguage === 'ar' ? professor.name_ar : professor.name_en}</h3>
+                            <p>${professor.specialty || t.noSpecialty}</p>
+                            <div class="item-rating">
+                                <span>${calculateProfessorRating(professor.id)}</span>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p><strong>${t.college}:</strong> ${professor.college}</p>
+                            <p><strong>${t.experience}:</strong> ${professor.experience || 'N/A'} ${t.years}</p>
+                            <p><strong>${t.education}:</strong> ${professor.education || 'N/A'}</p>
+                            <p><strong>${t.email}:</strong> ${professor.email || 'N/A'}</p>
+                        </div>
+                    </div>
+                `).join('');
+            } else if (matchingCourses.length > 0) {
+                showTab('courses');
+                const coursesGrid = document.getElementById('courses-grid');
+                coursesGrid.innerHTML = matchingCourses.map(course => `
+                    <div class="item-card">
+                        <div class="item-img">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div class="item-info">
+                            <h3>${currentLanguage === 'ar' ? course.name_ar : course.name_en}</h3>
+                            <p>${course.code}</p>
+                            <div class="item-rating">
+                                <span>${calculateCourseRating(course.id)}</span>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p><strong>${t.college}:</strong> ${course.college}</p>
+                            <p>${course.description || t.noDescription}</p>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            showNotification(`${t.resultsFound} "${searchTerm}"`);
+        }
+
+        // تبديل اللغة
+        function changeLanguage(lang) {
+            currentLanguage = lang;
+            const dir = lang === 'ar' ? 'rtl' : 'ltr';
+            document.body.dir = dir;
+            document.documentElement.lang = lang;
+            
+            // تحديث النصوص
+            updateTexts();
+            
+            // تحديث القوائم المنسدلة
+            if (document.getElementById('reviews').style.display !== 'none') {
+                loadReviewDropdowns();
+                displayStudentReviews();
+            }
+            
+            // تحديث قوائم التصفح
+            if (document.getElementById('browse').style.display !== 'none') {
+                refreshProfessorsList();
+                refreshCoursesList();
+            }
+        }
+
+        // تحديث النصوص في الصفحة
+        function updateTexts() {
+            const t = translations[currentLanguage];
+            
+            // تحديث التنقل
+            document.querySelector('nav a[onclick="showSection(\'home\')"]').textContent = t.home;
+            document.querySelector('nav a[onclick="showSection(\'browse\')"]').textContent = t.browse;
+            document.querySelector('nav a[onclick="showSection(\'reviews\')"]').textContent = t.reviews;
+            document.querySelector('nav a[onclick="showSection(\'admin\')"]').textContent = t.admin;
+            
+            // تحديث الصفحة الرئيسية
+            document.querySelector('.hero h2').textContent = t.heroTitle;
+            document.querySelector('.hero p').textContent = t.heroDescription;
+            document.getElementById('search-input').placeholder = t.searchPlaceholder;
+            
+            // تحديث المميزات
+            document.querySelector('.features .section-title').textContent = t.featuresTitle;
+            const featureCards = document.querySelectorAll('.feature-card');
+            featureCards[0].querySelector('h3').textContent = t.advancedSearch;
+            featureCards[0].querySelector('p').textContent = t.advancedSearchDesc;
+            featureCards[1].querySelector('h3').textContent = t.anonymousRating;
+            featureCards[1].querySelector('p').textContent = t.anonymousRatingDesc;
+            featureCards[2].querySelector('h3').textContent = t.detailedEvaluation;
+            featureCards[2].querySelector('p').textContent = t.detailedEvaluationDesc;
+            
+            // تحديث تقييمات الطلاب
+            if (document.getElementById('reviews').style.display !== 'none') {
+                document.querySelector('#reviews .section-title').textContent = t.studentReviews;
+                document.querySelector('.review-form-container h3').textContent = t.addReview;
+                document.querySelector('label[for="review-professor"]').textContent = t.selectProfessor;
+                document.querySelector('label[for="review-course"]').textContent = t.selectCourse;
+                document.querySelectorAll('.rating-category h4')[0].textContent = t.clarity;
+                document.querySelectorAll('.rating-category h4')[1].textContent = t.teachingStyle;
+                document.querySelectorAll('.rating-category h4')[2].textContent = t.courseDifficulty;
+                document.querySelector('label[for="review-comment"]').textContent = t.additionalComment;
+                document.getElementById('review-comment').placeholder = t.commentPlaceholder;
+                document.querySelector('label[for="review-anonymous"]').textContent = t.anonymousReview;
+                document.querySelector('.submit-btn').innerHTML = `<i class="fas fa-paper-plane"></i> ${t.submitReview}`;
+                document.querySelector('.reviews-display h3').textContent = t.studentOpinions;
+                
+                // تحديث القوائم المنسدلة
+                document.getElementById('review-professor').innerHTML = `<option value="">-- ${t.selectProfessor} --</option>`;
+                document.getElementById('review-course').innerHTML = `<option value="">-- ${t.selectCourse} --</option>`;
+            }
+            
+            // تحديث التصفح
+            if (document.getElementById('browse').style.display !== 'none') {
+                document.querySelector('#browse .section-title').textContent = t.browseTitle;
+                document.querySelector('.tab[onclick="showTab(\'professors\')"]').textContent = t.professors;
+                document.querySelector('.tab[onclick="showTab(\'courses\')"]').textContent = t.courses;
+            }
+            
+            // تحديث لوحة الإدارة
+            if (document.getElementById('admin').style.display !== 'none') {
+                document.querySelector('#admin .section-title').textContent = t.adminTitle;
+                document.querySelectorAll('.admin-section h3')[0].textContent = t.addNewProfessor;
+                document.querySelectorAll('.admin-section h3')[1].textContent = t.addNewCourse;
+                
+                // تحديث حقول النموذج
+                document.getElementById('prof-name-ar').placeholder = t.professorNameAr;
+                document.getElementById('prof-name-en').placeholder = t.professorNameEn;
+                document.getElementById('prof-specialty').placeholder = t.specialtyPlaceholder;
+                document.getElementById('prof-experience').placeholder = t.experiencePlaceholder;
+                document.getElementById('prof-education').placeholder = t.education;
+                document.getElementById('prof-college').innerHTML = `<option value="">${t.selectCollege}</option>${document.getElementById('prof-college').innerHTML.split('</option>').slice(1).join('</option>')}`;
+                document.getElementById('prof-email').placeholder = t.email;
+                document.querySelector('.admin-section:first-child .admin-btn').textContent = t.addProfessor;
+                
+                document.getElementById('course-name-ar').placeholder = t.courseNameAr;
+                document.getElementById('course-name-en').placeholder = t.courseNameEn;
+                document.getElementById('course-code').placeholder = t.courseCode;
+                document.getElementById('course-college').innerHTML = `<option value="">${t.selectCollege}</option>${document.getElementById('course-college').innerHTML.split('</option>').slice(1).join('</option>')}`;
+                document.getElementById('course-description').placeholder = t.courseDescription;
+                document.querySelector('.admin-section:last-child .admin-btn').textContent = t.addCourse;
+            }
+            
+            // تحديث التذييل
+            document.querySelectorAll('.footer-section h3')[0].textContent = t.aboutUs;
+            document.querySelectorAll('.footer-section p')[0].textContent = t.aboutText;
+            document.querySelectorAll('.footer-section h3')[1].textContent = t.quickLinks;
+            document.querySelectorAll('.footer-section h3')[2].textContent = t.contactUs;
+            document.querySelectorAll('.footer-section p')[2].textContent = t.contactText;
+            document.querySelector('.footer-bottom p').innerHTML = `© 2023 UBT Reviews. ${t.rights}`;
+            
+            // تحديث رابط اللغة
+            document.querySelector('.language-switcher span').textContent = t.language;
+        }
+
+        // تحديث القائمة النشطة في التنقل
+        function updateActiveNav(sectionId) {
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector(`nav a[onclick="showSection('${sectionId}')"]`).classList.add('active');
+        }
+
+        // التهيئة عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection('home');
+        });
+    </script>
+</body>
+</html>
