@@ -270,8 +270,8 @@
         }
 
         .star.active {
-            color: #f39c12;
-            text-shadow: 0 0 10px rgba(243, 156, 18, 0.5);
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
         }
 
         .comment-box {
@@ -1043,7 +1043,7 @@
                         <option value="كلية الهندسة">كلية الهندسة</option>
                     </select>
                     <textarea id="course-description" placeholder="وصف المادة" required></textarea>
-                    <button type="submit" class="admin-btn">إضافة مادة</button>
+f                    <button type="submit" class="admin-btn">إضافة مادة</button>
                 </form>
             </div>
         </div>
@@ -2374,6 +2374,24 @@
         document.addEventListener('DOMContentLoaded', function() {
             showSection('home');
         });
+        document.querySelectorAll('.stars').forEach(starsBox => {
+  const activeStars = starsBox.querySelectorAll('.star.active').length;
+
+  let color = '#f39c12';
+
+  if (activeStars === 1) {
+    color = 'red';
+  } else if (activeStars === 3) {
+    color = 'gold';
+  } else if (activeStars === 4) {
+    color = 'green';
+  }
+
+  starsBox.querySelectorAll('.star.active').forEach(star => {
+    star.style.color = color;
+  });
+});
     </script>
 </body>
+
 </html>
