@@ -1404,20 +1404,27 @@ f                    <button type="submit" class="admin-btn">إضافة مادة
 
         // نظام النجوم لتقييم الطلاب
         function rateStudentCategory(star, category) {
-            const stars = star.parentElement.querySelectorAll('.star');
-            const rating = Array.from(stars).indexOf(star) + 1;
-            
-            stars.forEach((s, index) => {
-                if (index < rating) {
-                    s.classList.add('active');
-                } else {
-                    s.classList.remove('active');
-                }
-            });
-            
-            studentRatings[category] = rating;
-            console.log(`تم تقييم ${category}: ${rating} نجوم`);
-        }
+  const stars = star.parentElement.querySelectorAll('.star');
+  const rating = Array.from(stars).indexOf(star) + 1;
+
+  let color = '#f39c12'; // الافتراضي
+
+  if (rating === 1) color = 'red';
+  else if (rating === 3) color = 'gold';
+  else if (rating >= 4) color = 'green';
+
+  stars.forEach((s, index) => {
+    if (index < rating) {
+      s.classList.add('active');
+      s.style.color = color;
+    } else {
+      s.classList.remove('active');
+      s.style.color = '#ddd';
+    }
+  });
+
+  studentRatings[category] = rating;
+}
 
         // 🔧 تصحيح دوال الحذف
         async function deleteStudentReview(reviewId) {
@@ -2408,4 +2415,5 @@ f                    <button type="submit" class="admin-btn">إضافة مادة
 </body>
 
 </html>
+
 
