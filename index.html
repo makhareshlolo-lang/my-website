@@ -2374,24 +2374,38 @@ f                    <button type="submit" class="admin-btn">إضافة مادة
         document.addEventListener('DOMContentLoaded', function() {
             showSection('home');
         });
-        document.querySelectorAll('.stars').forEach(starsBox => {
-  const activeStars = starsBox.querySelectorAll('.star.active').length;
+       document.querySelectorAll('.stars').forEach(starsBox => {
+  const stars = starsBox.querySelectorAll('.star');
 
-  let color = '#f39c12';
+  stars.forEach((star, index) => {
+    star.addEventListener('click', () => {
 
-  if (activeStars === 1) {
-    color = 'red';
-  } else if (activeStars === 3) {
-    color = 'gold';
-  } else if (activeStars === 4) {
-    color = 'green';
-  }
+      stars.forEach(s => {
+        s.classList.remove('active');
+        s.style.color = '#ddd';
+      });
 
-  starsBox.querySelectorAll('.star.active').forEach(star => {
-    star.style.color = color;
+      for (let i = 0; i <= index; i++) {
+        stars[i].classList.add('active');
+      }
+
+      let color = '#f39c12';
+
+      if (index + 1 === 1) color = 'red';
+      else if (index + 1 === 3) color = 'gold';
+      else if (index + 1 >= 4) color = 'green';
+
+      stars.forEach(s => {
+        if (s.classList.contains('active')) {
+          s.style.color = color;
+        }
+      });
+
+    });
   });
 });
     </script>
 </body>
 
 </html>
+
