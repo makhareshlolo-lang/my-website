@@ -2416,46 +2416,14 @@ f                    <button type="submit" class="admin-btn">إضافة مادة
   });
 });
     
-  /* ربط كل دكتور بالمواد اللي يدرسها */
-  const professorCourses = {
-    hawazen: [
-      "Introduction To Business Analytics (BAIS205)"
-    ],
-    halah: [
-      "Introduction to Programming (BAIS200)",
-      "E-Commerce (BAIS305)"
-    ],
-    abdullah: [
-      "Business Application Development (BAIS300)"
-    ],
-    nihal: [
-      "Database Management (BAIS210)"
-    ]
-  };
+  
 
-  const professorSelect = document.getElementById("review-professor");
-  const courseSelect = document.getElementById("review-course");
-
-  professorSelect.addEventListener("change", function () {
-    const selectedProfessor = this.value;
-
-    // تفريغ المواد
-    courseSelect.innerHTML = '<option value="">-- اختر المادة --</option>';
-
-    // إضافة المواد الخاصة بالدكتور المختار
-    if (professorCourses[selectedProfessor]) {
-      professorCourses[selectedProfessor].forEach(course => {
-        const option = document.createElement("option");
-        option.value = course;
-        option.textContent = course;
-        courseSelect.appendChild(option);
-      });
-    }
-  });
+ 
 </script>
 </body>
 
 </html>
+
 
 
 
